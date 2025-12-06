@@ -65,7 +65,7 @@ def delete_jobs():
 
 
     
-# @pytest.fixture(scope="session", autouse=True)
-# def delete_all_jobs_after_test():
-#     yield
-#     delete_jobs()
+@pytest.fixture(scope="session", autouse=True)
+def delete_all_jobs_after_test():
+    yield
+    delete_jobs()
