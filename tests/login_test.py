@@ -3,12 +3,16 @@ from data.endpoints import Endpoints
 from data.error_message import ErrorMessage
 from pages.login_page import LoginPage
 from data.assertions import Assertions
+from data.info.login_page_info import LoginPageInfo
+from data.info.main_page_info import MainPageInfo
 
 class TestLoginPage:
     locator = LoginPageLocator()
     endpoint = Endpoints()
     error = ErrorMessage()
     assertion = Assertions()
+    login_info = LoginPageInfo()
+    main_info = MainPageInfo()
 
 
     def test_login_successful(self, page):
@@ -16,13 +20,16 @@ class TestLoginPage:
 
         login_page.open()
 
-        self.assertion.verify_page_title(page, 'Sign in - Jenkins')
-        self.assertion.verify_text(page, self.locator.header, 'Sign in to Jenkins')
+        self.assertion.verify_element_visible(page, self.locator.checkbox)
+        self.assertion.verify_text(page, self.locator.checkbox, self.login_info.checkbox_info)
+
+        self.assertion.verify_page_title(page, self.login_info.page_title)
+        self.assertion.verify_text(page, self.locator.header, self.login_info.header)
         
         login_page.submit_login()
         
-        self.assertion.verify_page_title(page, 'Dashboard - Jenkins')
-        self.assertion.verify_text(page, self.locator.header, 'Welcome to Jenkins!')
+        self.assertion.verify_page_title(page, self.main_info.page_title)
+        self.assertion.verify_text(page, self.locator.header, self.main_info.header)
         
     def test_login_invalid_username(self, page):
         login_page = LoginPage(page, self.endpoint.login)
