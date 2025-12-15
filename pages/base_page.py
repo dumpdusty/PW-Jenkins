@@ -7,7 +7,6 @@ class BasePage:
     def open(self):
         self.page.goto(self.url)
 
-
     def input_data(self, loc, text_data):
         self.page.locator(loc).fill(text_data)
 
@@ -28,3 +27,12 @@ class BasePage:
         text = self.page.locator(loc).all_text_contents()
         return text
 
+
+
+# class TestPage:
+
+#     def __init__(self, page):
+#         self.page = page
+
+#     def navigate_to(self, url):
+#         self.page.goto(url) 

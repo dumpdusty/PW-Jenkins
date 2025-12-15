@@ -3,6 +3,7 @@ import pytest
 import requests
 import os
 from dotenv import load_dotenv
+from data.endpoints import Endpoints
 
 load_dotenv() 
 
@@ -48,7 +49,6 @@ def page(playwright: Playwright, get_cookies):
     page.close()
     context.close()
     browser.close()
-    
     
     
 def get_all_jobs():
